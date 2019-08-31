@@ -1,0 +1,21 @@
+
+version: "3.4"
+services:
+  tracker:
+    ports:
+      - 8000:8000
+    env_file:
+      - .env
+    expose:
+      - "8000"
+    image: '${REGISTRY_NAME}henkel/bittorrent-tracker:latest'
+    environment:
+      - VIRTUAL_HOST=${VIRTUAL_HOST}
+    networks:
+      - "reverseproxy"
+      - "internal"
+networks:
+  reverseproxy:
+    external:
+      name: "reverseproxy"
+  internal:
